@@ -1,0 +1,30 @@
+{
+  "name": "@altgram/vue3-one-time-password",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/one-time-password.umd.js",
+  "module": "./dist/one-time-password.es.js",
+  "files": [
+	"dist"
+  ],
+  "exports": {
+	".": {
+	  "import": "./dist/one-time-password.es.js",
+	  "require": "./dist/one-time-password.umd.js"
+	}
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.4.19"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.4",
+    "vue-tsc": "^1.8.27"
+  }
+}
