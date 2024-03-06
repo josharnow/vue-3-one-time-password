@@ -24,10 +24,7 @@ Customizable OTP (One Time Password) component for web apps, compatible with Vue
 
 <br/>
 
-<p  align="center">
-<img width="400px" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3dubTBpcnh4cnJ2cWRjdWVkMTZqeHZvMW5xOGdqdGk4b25jMDZsMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mIOdhm6WqpRIp3RnAg/source.gif"
-alt="OTP input preview">
-</p>
+![Example Image](./assets/otp-preview.gif)
 
 <br/>
 
