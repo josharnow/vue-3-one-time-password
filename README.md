@@ -18,7 +18,6 @@ Customizable OTP (One Time Password) component for web apps, compatible with Vue
 <a  href="#props">Props</a> •
 <a  href="#events">Events</a> •
 <a  href="#styling">Styling</a> •
-<a  href="#contribute">Contribute </a> •
 <a  href="#license">License</a>
 </p>
 
@@ -45,50 +44,40 @@ yarn add @altgram/vue3-one-time-password
 just import to your component :
 
 ``` html
-	<template>
-		<div>
-			<otp-input
-			:isValid="isCodeValid"
-			@on-complete="onCompleteHandler"
-			@on-changed="onChangedHandler"
-			@on-paste="onPasteHandler">
-				<template #errorMessage> There is an error </template>
-			</otp-input>
-		</div>
-	</template>
+<OneTimePassword
+   mode="group"
+   :isValid="isCodeValid"
+   @completed="onCompleted"
+   @changed="onChanged"
+   @paste="onPaste"
+/>
 
-	<script>
-	import  OtpInput  from  "otp-input-vue2";
+<script setup>
+import {OneTimePassword} from '@altgram/vue3-one-time-password'
 
-	export default {
-	name:"yourComponent",
-	components:{
-		OtpInput,
-	},
-	data(){
-		return {
-			isCodeValid: true,
-		};
-	},
-	methods: {
-		onCompleteHandler(code){
-		console.log("code completed",  code);
-		this.isCodeValid = false;
-		},
+// You can utilize styles provided by the package
+// or customize them using styled-components to suit your needs.
+import "@altgram/vue3-one-time-password/style.css"
 
-		onChangedHandler(lastEnteredCode){
-		console.log("code changed",  lastEnteredCode);
-		this.isCodeValid = true;
-		},
+import {ref} from "vue";
+const isTokenValid = ref(true),
 
-		onPasteHandler(code){
-		console.log("code pasted",  code);
-		},
-	},
+const onCompleted = (token) => {
+    console.debug("Completed", token);
+    //do some code to handle validity
+    isTokenValid.value = true;
+};
 
-	};
+const onChanged = (token) => {
+    console.debug("Token changed",  token);
+    //do some code to handle validity
+    isTokenValid.value = false;
+};
 
-	</script>
+const onPaste = (token) => {
+    console.debug("Token pasted", token);
+};
+</script>
 ```
 <br/>
 
@@ -423,16 +412,6 @@ or in group mode with `activeWrapperClass` prop :
 
 <br/>
 <br/>
-
-##  Contribute
-
-You can help me and contribute for :
-
-- New options
-
-- Bug Fix
-
-- Better exceptions
 
 ## License
 MIT

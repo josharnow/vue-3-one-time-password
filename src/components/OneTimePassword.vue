@@ -34,7 +34,6 @@
 
 <script lang="ts" setup>
 import {computed, defineProps, onMounted, defineEmits, ref, StyleValue} from "vue";
-
 const emit = defineEmits(['value', 'completed', 'changed', 'paste'])
 const INPUT_PASSWORD = 'password';
 const INPUT_TEXT = 'text';
