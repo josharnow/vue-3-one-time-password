@@ -1,18 +1,441 @@
-# Vue 3 + TypeScript + Vite
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+<h1  align="center">
+<br>
+<img width="100px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1024px-Vue.js_Logo_2.svg.png" alt="vue-logo">
+<br>
+One Time Password Component
+<br>
+</h1>
+<h4  align="center">
+Customizable OTP (One Time Password) component for web apps, compatible with Vue 3
+</h4>
+<br/>
 
-## Recommended IDE Setup
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+<p  align="center">
+<a  href="#installation">Installation</a> •
+<a  href="#key-features">Key Features</a> •
+<a  href="#props">Props</a> •
+<a  href="#events">Events</a> •
+<a  href="#styling">Styling</a> •
+<a  href="#contribute">Contribute </a> •
+<a  href="#license">License</a>
+</p>
 
-## Type Support For `.vue` Imports in TS
+<br/>
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+<p  align="center">
+<img width="400px" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3dubTBpcnh4cnJ2cWRjdWVkMTZqeHZvMW5xOGdqdGk4b25jMDZsMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mIOdhm6WqpRIp3RnAg/source.gif"
+alt="OTP input preview">
+</p>
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+<br/>
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+## Installation
+
+To install:
+
+```sh
+npm i @altgram/vue3-one-time-password
+```
+/
+```sh
+yarn add @altgram/vue3-one-time-password
+```
+
+<h4> Basic Example :</h4>
+  <br/>
+just import to your component :
+
+``` html
+	<template>
+		<div>
+			<otp-input
+			:isValid="isCodeValid"
+			@on-complete="onCompleteHandler"
+			@on-changed="onChangedHandler"
+			@on-paste="onPasteHandler">
+				<template #errorMessage> There is an error </template>
+			</otp-input>
+		</div>
+	</template>
+
+	<script>
+	import  OtpInput  from  "otp-input-vue2";
+
+	export default {
+	name:"yourComponent",
+	components:{
+		OtpInput,
+	},
+	data(){
+		return {
+			isCodeValid: true,
+		};
+	},
+	methods: {
+		onCompleteHandler(code){
+		console.log("code completed",  code);
+		this.isCodeValid = false;
+		},
+
+		onChangedHandler(lastEnteredCode){
+		console.log("code changed",  lastEnteredCode);
+		this.isCodeValid = true;
+		},
+
+		onPasteHandler(code){
+		console.log("code pasted",  code);
+		},
+	},
+
+	};
+
+	</script>
+```
+<br/>
+
+Expected output :
+
+<br/>
+
+<p align="center">
+<img src="https://i.ibb.co/BgR6Yvn/otp-input-error.gif" alt="otp-input-error" border="0">
+</p>
+
+
+
+##  Key Features
+
+- [x] Dynamic display modes - **Group** and **Separate**
+
+- [x] Fully customizable style - **Input** , **wrapper** , **Active Input**, **Errors**
+
+- [x] Direction of inputs - **RTL** / **LTR**
+
+- [x] Dynamic Type - **Number** and **Text**
+
+- [x] Dynamic **Number of inputs**
+
+- [x] Your desired character as input **placeholder**
+
+- [x] Controllable **gap** between inputs
+
+- [x] **Disabled** inputs
+
+- [x] **Error handling** - with customizable text
+
+- [x] **Auto Focus** on inputs
+
+- [x] **Password** input type
+
+- [ ]  **web-otp** - auto fill input from sms  *(Coming soon ... )*
+
+- [ ]  **Vue 3.x** - compatible with vue 3.x *(Coming soon ... )*
+  <br/>
+  <br/>
+
+## Props
+
+<table>
+<tbody>
+  <tr>
+    <td>Name</td>
+    <td>Type</td>
+    <td>Default</td>
+    <td>Description</td>
+  </tr>
+  <tr>
+    <td>id</td>
+    <td>String</td>
+    <td>"otp"</td>
+    <td>Id of opt input when you have multiple otp-inputs in a page.</td>
+  </tr>
+  <tr>
+    <td>digits</td>
+    <td>Number</td>
+    <td>5</td>
+    <td>Number of OTP inputs to be rendered.</td>
+  </tr>
+  <tr>
+    <td>mode</td>
+    <td>String</td>
+    <td>"separate"</td>
+    <td>Way of showing opt input, options: separate , group</td>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>String</td>
+    <td>"number"</td>
+    <td>Type of input data , options : number, text, password</td>
+  </tr>
+  <tr>
+    <td>placeholder</td>
+    <td>String</td>
+    <td> "-" </td>
+    <td>Placeholder of inputs where data places</td>
+  </tr>
+  <tr>
+    <td>radius</td>
+    <td>Number</td>
+    <td>5</td>
+    <td>Border radius of inputs (in both modes)</td>
+  </tr>
+  <tr>
+    <td>gap</td>
+    <td>Number</td>
+    <td>10</td>
+    <td>Gap between inputs (in both modes)</td>
+  </tr>
+  <tr>
+    <td>isDisabled</td>
+    <td>Boolean</td>
+    <td>false</td>
+    <td> Whether the input are Disabled or not</td>
+  </tr>
+  <tr>
+    <td>isValid</td>
+    <td>Boolean</td>
+    <td>true</td>
+     <td>Whether the entered value is valid or not</td></tr>
+  <tr>
+    <td>rtl</td>
+    <td>Boolean</td>
+    <td>false</td>
+    <td>Whether the input is RTL or not</td>
+  </tr>
+  <tr>
+    <td>autoFocus</td>
+    <td>Boolean</td>
+    <td>true</td>
+    <td>The input should be focused-on when page rendered or not</td>
+  </tr>
+  <tr>
+    <td>separateInputClass</td>
+    <td>String</td>
+    <td>-</td>
+    <td>Single input class in separate mode</td>
+  </tr>
+  <tr>
+    <td>separateWrapperClass</td>
+    <td>String</td>
+    <td>-</td>
+    <td>Inputs wrapper class in separate mode</td>
+  </tr>
+  <tr>
+    <td>groupInputClass</td>
+    <td>String</td>
+    <td>-</td>
+    <td>Single input class in  group mode</td>
+  </tr>
+  <tr>
+    <td>groupWrapperClass</td>
+    <td>String</td>
+    <td>-</td>
+    <td>Inputs wrapper class in group mode</td>
+  </tr>
+  <tr>
+    <td>activeInputClass</td>
+    <td>String</td>
+    <td>-</td>
+    <td>Style of single input when its focused</td>
+  </tr>
+  <tr>
+    <td>activeWrapperClass</td>
+    <td>String</td>
+    <td>-</td>
+    <td>Style of inputs wrapper when its focused on one input</td>
+  </tr>
+</tbody>
+</table>
+<br/>
+
+>  **Note**
+> Don't Panic! 😁 There is a guide to how use class props and style inputs as you wish, [see this guide](#styling).
+
+<br/>
+
+## Events
+
+
+<table>
+<tbody>
+  <tr>
+    <td>Name</td>
+    <td>Description</td>
+  </tr>
+  <tr>
+    <td>on-complete</td>
+    <td>Return OTP value typed in inputs when all digits are completed </td>
+  </tr>
+  <tr>
+    <td>on-changed</td>
+    <td>Return Last single OTP value in inputs after typing</td>
+  </tr>
+  <tr>
+    <td>on-paste</td>
+    <td>its triggered when paste value in inputs</td>
+  </tr>
+</tbody>
+</table>
+
+<br/>
+
+## Styling
+To customize the appearance of the inputs, we can pass our classes to the component as props:
+
+First we should know how to pass class to otp component and use it . there is several approach, we focus on **scoped CSS** with *deep selector* (you can do yours😉) :
+
+<h4>Separate Mode :</h4>
+
+template :
+``` html
+<template>
+ <otp-input
+	separateWrapperClass="separate-wrapper-class"
+	separateInputClass="separate-input-class"
+ />
+</template>
+```
+css :
+``` CSS
+<style scoped>
+ .vue-otp-input  >>>  .separate-input-class {
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	background-color: aquamarine;
+	color: blue;
+	border: solid  2px  red;
+	width: 48px;
+	height: 48px;
+ }
+
+.vue-otp-input  >>>  .separate-wrapper-class {
+	border: solid  3px  green;
+}
+</style>
+```
+output:
+
+<img src="https://i.ibb.co/wYpSff2/Screenshot-2022-08-12-181410.jpg" alt="Screenshot-2022-08-12-181410" border="0">
+
+<h4>Group Mode :</h4>
+<br/>
+
+template :
+
+``` html
+<template>
+ <otp-input
+	mode="group"
+	groupWrapperClass="group-wrapper-class"
+	groupInputClass="group-input-class"
+/>
+</template>
+```
+
+css :
+
+``` CSS
+<style scoped>
+.vue-otp-input  >>>  .group-wrapper-class {
+	border: solid  3px  green;
+	background-color: blue;
+}
+
+.vue-otp-input  >>>  .group-input-class {
+	background-color: blue;
+	border: none;
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	color: #fff;
+	width: 48px;
+	height: 48px;
+}
+</style>
+```
+
+output :
+
+<img src="https://i.ibb.co/vqpdcrR/Screenshot-2022-08-12-182437.jpg" alt="Screenshot-2022-08-12-182437" border="0">
+
+---
+<h4>Error Message  :</h4>
+
+template :
+``` html
+<template>
+	 <otp-input
+	 :isValid="false"  errorClass="error-class">
+	 <template #errorMessage> There is an error </template>
+	</otp-input>
+</template>
+
+```
+
+css :
+``` CSS
+<style scoped>
+
+.vue-otp-input  >>>  .error-class {
+	color: #66ff00;
+	line-height: 1.5em;
+	font-weight: bold;
+}
+</style>
+```
+output :
+
+<img src="https://i.ibb.co/DG94KdD/Screenshot-2022-08-12-205308.jpg" alt="Screenshot-2022-08-12-205308" border="0">
+
+<br/>
+
+<h4>Active input  (focus)   :</h4>
+<br/>
+template :
+
+``` html
+<template>
+	 <otp-input
+		 activeInputClass="active-input-class">
+	</otp-input>
+</template>
+```
+css :
+``` CSS
+<style scoped>
+
+.vue-otp-input  >>>  .active-input-class {
+	text-align: center;
+	border-color: red  !important;
+	transform: scale(1.2);
+}
+</style>
+```
+
+output :
+
+<img src="https://i.ibb.co/d0pYb2m/Screenshot-2022-08-12-215955.jpg" alt="Screenshot-2022-08-12-215955" border="0">
+
+or in group mode with `activeWrapperClass` prop :
+
+
+<img src="https://i.ibb.co/7VhVkzR/Screenshot-2022-08-12-220828.jpg" alt="Screenshot-2022-08-12-220828" border="0">
+
+<br/>
+<br/>
+
+##  Contribute
+
+You can help me and contribute for :
+
+- New options
+
+- Bug Fix
+
+- Better exceptions
+
+## License
+MIT

@@ -1,6 +1,22 @@
 {
   "name": "@altgram/vue3-one-time-password",
+  "description": "Customizable OTP (One Time Password) component for web apps, compatible with Vue 3",
   "version": "0.0.1",
+  "private": false,
+  "author": {
+    "name": "Daniel Gramblička",
+    "email": "gramblicka.daniel@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "otp",
+    "vuejs",
+    "otpInput",
+    "verifyCode",
+    "otpComponent",
+    "oneTimePassword"
+  ],
   "type": "module",
   "main": "./dist/one-time-password.umd.js",
   "module": "./dist/one-time-password.es.js",
@@ -27,5 +43,11 @@
     "typescript": "^5.2.2",
     "vite": "^5.1.4",
     "vue-tsc": "^1.8.27"
-  }
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions"
+  ]
 }
