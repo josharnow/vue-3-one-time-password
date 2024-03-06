@@ -5,13 +5,14 @@
   "main": "./dist/one-time-password.umd.js",
   "module": "./dist/one-time-password.es.js",
   "files": [
-	"dist"
+    "dist"
   ],
   "exports": {
-	".": {
-	  "import": "./dist/one-time-password.es.js",
-	  "require": "./dist/one-time-password.umd.js"
-	}
+    ".": {
+      "import": "./dist/one-time-password.es.js",
+      "require": "./dist/one-time-password.umd.js"
+    },
+    "./style.css": "./dist/style.css"
   },
   "scripts": {
     "dev": "vite",

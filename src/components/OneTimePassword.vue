@@ -6,9 +6,9 @@
         :style="wrapperStyle()"
     >
       <input
-          v-for="(digitInput, index) in digitsCount"
+          v-for="(digitInputNumber, index) in digitsCount"
           ref="digitInput"
-          :key="index + digitInput"
+          :key="index + digitInputNumber"
           v-model="inputValue[index]"
           autocomplete="one-time-code"
           class="otp-input"
@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, defineProps, onMounted, defineEmits, ref} from "vue";
+import {computed, defineProps, onMounted, defineEmits, ref, StyleValue} from "vue";
 
 const emit = defineEmits(['value', 'completed', 'changed', 'paste'])
 const INPUT_PASSWORD = 'password';
@@ -135,7 +135,7 @@ const isInputFocused = ref(false);
 const activeInput = ref(-1);
 const digitInput = ref(null);
 
-const wrapperStyle = () => {
+const wrapperStyle = (): StyleValue => {
   return {
     direction: 'ltr',
     gap: `${layoutGap}px`,
@@ -149,7 +149,7 @@ const inputStyle = (): {"--border-radius": string} => {
   }
 }
 
-const inputClassHandler = (): string => {
+const inputClassHandler = (): any => {
   if (mode === 'separate') {
     if (isValid) {
       return separateInputClass ? separateInputClass : 'default-input-separate';
@@ -198,50 +198,56 @@ const errorClassHandler = computed((): string => {
   return errorClass ? errorClass : 'default-error-class';
 })
 
-const init = (): void => {
-  onFocus(0);
-  digitInput.value[0].focus();
-  if (allowedInputTypes.indexOf(inputType) !== -1) {
-    digitInput.value.forEach((input) => {
-      input.type = inputType;
-
-      if (inputType === 'number') {
-        input.addEventListener('input', () => {
-          input.value = input.value.replace(/\D/g, '');
-        });
-      }
-    });
-  }
-}
 
 onMounted(() => {
   if (autoFocus && !isDisabled) {
-    init()
+    onFocus(0);
+    // @ts-ignore
+    digitInput.value[0].focus();
+    if (allowedInputTypes.indexOf(inputType) !== -1) {
+      // @ts-ignore
+      digitInput.value.forEach((input: any) => {
+        input.type = inputType;
+
+        if (inputType === 'number') {
+          input.addEventListener('input', () => {
+            input.value = input.value.replace(/\D/g, '');
+          });
+        }
+      });
+    }
   }
 })
 
+// @ts-ignore
 const reset = (): void => {
   inputValue.value = [];
   joinedValue.value = '';
 }
 
 const BACKSPACE_KEY_NUMBER = 8;
-const keydownHandler = (index, e): void => {
+const keydownHandler = (index: number, e: any): void => {
   if (e.keyCode === BACKSPACE_KEY_NUMBER && e.target.value === '') {
+    // @ts-ignore
     digitInput.value[Math.max(0, index - 1)].focus();
   }
 }
 
-const onInput = (index): void => {
+const onInput = (index: number): void => {
   const [first, ...rest] = inputType === INPUT_NUMBER
+      // @ts-ignore
       ? inputValue.value[index].replace(/[^0-9]/g, '')
       : inputValue.value[index];
+  // @ts-ignore
   inputValue.value[index] = first === null || first === undefined ? '' : first;
   const lastInputBox = index === digitsCount - 1;
   const insertedContent = first !== undefined;
   if (insertedContent && !lastInputBox) {
+    // @ts-ignore
     digitInput.value[index + 1].focus();
+    // @ts-ignore
     digitInput.value[index + 1].value = rest.join('');
+    // @ts-ignore
     digitInput.value[index + 1].dispatchEvent(new Event('input'));
   }
   joinedValue.value = inputValue.value.map((value) => value).join('');
@@ -252,7 +258,7 @@ const onInput = (index): void => {
   onChanged();
 }
 
-const onFocus = (index): void => {
+const onFocus = (index: number): void => {
   activeInput.value = index;
   isInputFocused.value = true;
 }
@@ -262,13 +268,17 @@ const onBlur = (): void => {
   isInputFocused.value = false;
 }
 
-const onComplete = (value): void => {
+const onComplete = (value: any): void => {
   onBlur();
-  digitInput.value[digitsCount - 1].blur();
+  const number = digitsCount - 1;
+  if (digitInput.value && digitInput.value[number]) {
+    //@ts-ignore
+    digitInput.value[number].blur();
+  }
   if (inputType === INPUT_PASSWORD) {
-    emit('complete', value);
+    emit('completed', value);
   } else {
-    emit('complete', value)
+    emit('completed', value)
   }
 }
 
@@ -276,12 +286,12 @@ const onChanged = (): void => {
   emit('changed', inputValue.value.map((value) => value).join(''));
 }
 
-const onPaste = (event): void => {
+const onPaste = (event: any): void => {
   emit('paste', event);
 }
 </script>
 
-<style scoped>
+<style>
 div.otp-app {
   width: max-content;
 }
@@ -371,7 +381,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
 }
