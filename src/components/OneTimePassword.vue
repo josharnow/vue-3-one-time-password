@@ -37,7 +37,7 @@
 <script lang="ts" setup>
 import {defineProps, onMounted, defineEmits, ref} from "vue";
 
-const emit = defineEmits(['value', 'completed', 'changed', 'paste'])
+const emit = defineEmits(['completed', 'changed', 'paste'])
 
 const INPUT_PASSWORD = 'password';
 const INPUT_TEXT = 'text';
@@ -141,11 +141,7 @@ const inputDirection = reverseDirection ? DIRECTION_RTL : DIRECTION_LTR;
 
 const classInput = otpMode === GROUP_MODE ? 'otp-input-group' : 'otp-element-input-divided';
 const otpWrapperValidClass = isValid ? customWrapperValidClass : customWrapperErrorClass;
-console.log('otpis');
-console.log(otpWrapperValidClass);
 const otpWrapperActive = otpMode === GROUP_MODE ? otpWrapperValidClass : '';
-console.log('resu');
-console.log(otpWrapperActive);
 const dividedModeValid = isValid ? 'otp-element-input-divided' : 'otp-wrapper-divided-err';
 const inputElementClass = otpMode === DIVIDED_MODE ? dividedModeValid : 'otp-input-group'
 const activeInputClass = otpMode === DIVIDED_MODE ? customActiveInputClass : '';
@@ -214,9 +210,6 @@ const onKeydownTrigger = (index: number, event: KeyboardEvent): void => {
  * @return {void}
  */
 const onInputTrigger = (index: number): void => {
-  if (!inputModel.value || !inputModel.value[index]) {
-    return
-  }
   const inputModelValue: string[] = inputModel.value;
   const [first, ...rest] = inputType === INPUT_NUMBER
       ? inputModelValue[index].replace(/[^0-9]/g, '')
@@ -231,11 +224,12 @@ const onInputTrigger = (index: number): void => {
     digitInputValue[index + 1].dispatchEvent(new Event('input'));
   }
   joinedValue.value = inputModel.value.map((value) => value).join('');
-  emit('value', joinedValue.value);
+
   if (joinedValue.value.length === inputCount) {
     onComplete(joinedValue.value);
   }
   onChangedEmit();
+  // @todo fix - on paste call x times / on change input calls twice
 }
 
 /**
@@ -292,7 +286,6 @@ const onPasteTrigger = (event: ClipboardEvent): void => {
  * Mounted hook for app initialization
  */
 onMounted(() => {
-  console.log(inputType);
   if (isAutoFocus && !isDisabled) {
     checkOtpMode()
     init()

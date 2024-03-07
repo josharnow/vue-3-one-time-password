@@ -34,18 +34,18 @@ To install:
 ```sh
 npm i @altgram/vue3-one-time-password
 ```
-/
+or
 ```sh
 yarn add @altgram/vue3-one-time-password
 ```
 
 <h4> Basic Example :</h4>
   <br/>
-just import to your component :
+Import component into your app
 
 ``` html
 <OneTimePassword
-   mode="group"
+   otpMode="group"
    :isValid="isCodeValid"
    @completed="onCompleted"
    @changed="onChanged"
