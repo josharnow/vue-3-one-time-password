@@ -16,7 +16,8 @@
           :class="[
               inputElementClass,
               activeInput === index ? activeInputClass : '',
-              customInputClass
+              customInputClass,
+              hideCursor ? 'hide-cursor' : ''
               ]"
           :placeholder="placeholder"
           :disabled="isDisabled"
@@ -35,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import {defineProps, onMounted, defineEmits, ref} from "vue";
+import {defineProps, onMounted, defineEmits, ref, defineExpose} from "vue";
 
 const emit = defineEmits(['completed', 'changed', 'paste'])
 
@@ -49,7 +50,6 @@ const DIVIDED_MODE = 'divided';
 const allowedModes = [GROUP_MODE, DIVIDED_MODE];
 
 const DIRECTION_LTR = 'ltr';
-//@ts-ignore
 const DIRECTION_RTL = 'rtl';
 
 const {
@@ -68,6 +68,7 @@ const {
   customActiveInputClass,
   customWrapperValidClass,
   customWrapperErrorClass,
+  hideCursor
 } = defineProps({
   inputCount: {
     type: Number,
@@ -128,6 +129,10 @@ const {
   customWrapperErrorClass: {
     type: String,
     default: 'otp-wrapper-error',
+  },
+  hideCursor: {
+    type: Boolean,
+    default: false
   }
 });
 
@@ -142,7 +147,7 @@ const inputDirection = reverseDirection ? DIRECTION_RTL : DIRECTION_LTR;
 const classInput = otpMode === GROUP_MODE ? 'otp-input-group' : 'otp-element-input-divided';
 const otpWrapperValidClass = isValid ? customWrapperValidClass : customWrapperErrorClass;
 const otpWrapperActive = otpMode === GROUP_MODE ? otpWrapperValidClass : '';
-const dividedModeValid = isValid ? 'otp-element-input-divided' : 'otp-wrapper-divided-err';
+const dividedModeValid = isValid ? 'otp-wrapper-divided-valid' : 'otp-wrapper-divided-err';
 const inputElementClass = otpMode === DIVIDED_MODE ? dividedModeValid : 'otp-input-group'
 const activeInputClass = otpMode === DIVIDED_MODE ? customActiveInputClass : '';
 
@@ -183,11 +188,21 @@ const checkOtpMode = (): void => {
   }
 }
 
-// @ts-ignore
+/**
+ * Reset model value
+ */
 const reset = (): void => {
   inputModel.value = [];
   joinedValue.value = '';
+  init()
 }
+
+/**
+ * Expose method "reset" for parent component call
+ */
+defineExpose({
+  reset
+});
 
 /**
  * Handle backspace in case of divided inputs
@@ -198,7 +213,6 @@ const reset = (): void => {
 const onKeydownTrigger = (index: number, event: KeyboardEvent): void => {
   const target = event.target as HTMLInputElement;
   if (event.key === BACKSPACE_KEY && target.value === '') {
-    // @ts-ignore
     digitInputCollection.value[Math.max(0, index - 1)].focus();
   }
 }
@@ -221,7 +235,6 @@ const onInputTrigger = (index: number): void => {
     const digitInputValue = digitInputCollection.value;
     digitInputValue[index + 1].focus();
     digitInputValue[index + 1].value = rest.join('');
-    digitInputValue[index + 1].dispatchEvent(new Event('input'));
   }
   joinedValue.value = inputModel.value.map((value) => value).join('');
 
@@ -229,7 +242,6 @@ const onInputTrigger = (index: number): void => {
     onComplete(joinedValue.value);
   }
   onChangedEmit();
-  // @todo fix - on paste call x times / on change input calls twice
 }
 
 /**
@@ -279,6 +291,8 @@ const onChangedEmit = (): void => {
  * @return {void}
  */
 const onPasteTrigger = (event: ClipboardEvent): void => {
+  inputModel.value = event.clipboardData ? event.clipboardData.getData('text').split('').slice(0, inputCount) : [];
+  digitInputCollection.value[inputModel.value.length - 1].focus();
   emit('paste', event);
 }
 
@@ -294,11 +308,11 @@ onMounted(() => {
 </script>
 
 <style>
-div.otp-app {
+.otp-app {
   width: 100%;
 }
 
-div.otp-app div.otp-wrapper {
+.otp-app .otp-wrapper {
   direction: ltr;
   text-align: center;
   display: flex;
@@ -310,22 +324,22 @@ div.otp-app div.otp-wrapper {
   overflow: hidden;
 }
 
-div.otp-app div.otp-wrapper.otp-wrapper-error {
+.otp-app .otp-wrapper-error {
   border: 1px solid #af0000;
 }
 
-div.otp-app div.otp-wrapper input.otp-element-input {
+.otp-app .otp-element-input {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 0.3s;
   border-radius: 5px;
 }
 
-div.otp-app div.otp-wrapper input.otp-element-input:disabled {
+.otp-app .otp-element-input:disabled {
   background-color: #ececec !important;
 }
 
-div.otp-app div.otp-wrapper input.otp-element-input-divided {
+.otp-app .otp-wrapper-divided-valid {
   text-align: center;
   font-weight: 300;
   background-color: transparent;
@@ -334,7 +348,7 @@ div.otp-app div.otp-wrapper input.otp-element-input-divided {
   height: 40px;
 }
 
-div.otp-app div.otp-wrapper input.otp-wrapper-divided-err {
+.otp-app .otp-wrapper-divided-err {
   text-align: center;
   font-weight: 300;
   background-color: transparent;
@@ -343,11 +357,11 @@ div.otp-app div.otp-wrapper input.otp-wrapper-divided-err {
   height: 40px;
 }
 
-div.otp-app div.otp-input-group {
+.otp-app .otp-input-group {
   border: solid 1px #dedede;
 }
 
-div.otp-app input.otp-input-group {
+.otp-app .otp-input-group {
   background-color: transparent;
   font-weight: 300;
   border: none;
@@ -358,18 +372,17 @@ div.otp-app input.otp-input-group {
 
 
 @media only screen and (max-width: 600px) {
-  div.otp-app input.otp-input-group {
+  .otp-app .otp-input-group {
     width: 2.5rem;
     height: 40px;
   }
 }
 
-/*div.otp-app div.otp-wrapper input.otp-input-divided*/
-div.otp-app div.otp-wrapper input.otp-input-active {
+.otp-app .otp-input-active {
   border: solid 1px #525252;
 }
 
-div.otp-app div.otp-wrapper-active {
+.otp-app .otp-wrapper-active {
   border: solid 1px #525252;
 }
 
@@ -377,7 +390,10 @@ input:focus {
   outline: none;
 }
 
-/* Removing the arrow keys on side of the input area */
+input.hide-cursor:focus {
+  caret-color: transparent;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

@@ -1,4 +1,3 @@
-
 <h1  align="center">
 <br>
 <img width="100px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1024px-Vue.js_Logo_2.svg.png" alt="vue-logo">
@@ -7,20 +6,26 @@ One Time Password Component
 <br>
 </h1>
 <h4  align="center">
-Customizable OTP (One Time Password) component for web apps, compatible with Vue 3
+Customizable OTP (One Time Password) component for web apps, compatible with Vue 3.
+Autofill one time code from email / sms.
 </h4>
+<p>The OTP component allows you to utilize two display modes (divided and group)
+with an adjustable number of inputs. You can either write your own styling or
+utilize predefined styles for all tags, including active/error classes.
+Additionally, you can choose of three types of inputs (number, text, password)
+and insert your own error messages.</p>
 <br/>
 
-
 <p  align="center">
-<a  href="#installation">Installation</a> •
-<a  href="#key-features">Key Features</a> •
-<a  href="#props">Props</a> •
-<a  href="#events">Events</a> •
-<a  href="#styling">Styling</a> •
-<a  href="#license">License</a>
+    <a  href="#installation">Installation</a> •
+    <a  href="#usage">Usage</a> •
+    <a  href="#events">Events</a> •
+    <a  href="#mainProps">Main Props</a> •
+    <a  href="#styling">Styling</a> •
+    <a  href="#stylingProps">Styling Props</a> •
+    <a  href="#examples">Examples</a> •
+    <a  href="#license">License</a>
 </p>
-
 <br/>
 
 ![Example Image](./assets/otp-preview.gif)
@@ -29,99 +34,110 @@ Customizable OTP (One Time Password) component for web apps, compatible with Vue
 
 ## Installation
 
-To install:
-
 ```sh
 npm i @altgram/vue3-one-time-password
 ```
+
 or
+
 ```sh
 yarn add @altgram/vue3-one-time-password
 ```
 
-<h4> Basic Example :</h4>
-  <br/>
-Import component into your app
+## Usage
+
+1. Import component into your app
 
 ``` html
-<OneTimePassword
-   otpMode="group"
-   :isValid="isCodeValid"
-   @completed="onCompleted"
-   @changed="onChanged"
-   @paste="onPaste"
-/>
+<script setup>
+    import {OneTimePassword} from '@altgram/vue3-one-time-password'
+
+    // You can utilize styles provided by the package
+    // or customize them using own styling to suit your needs.
+    // - Look at the "Styling" section bellow
+    import "@altgram/vue3-one-time-password/style.css"
+</script>
+```
+
+2. Insert otp component into your template
+
+``` html
+<template>
+    <OneTimePassword/>
+</template>
+```
+
+## Events
+
+<table>
+<tbody>
+  <tr>
+    <td>Event Name</td>
+    <td>Description</td>
+  </tr>
+  <tr>
+    <td>@completed</td>
+    <td>Return string that represent OTP value typed in inputs when all digits are completed </td>
+  </tr>
+  <tr>
+    <td>@changed</td>
+    <td>Return string that represent OTP value when input changed </td>
+  </tr>
+  <tr>
+    <td>@paste</td>
+    <td>Triggered when paste value into OTP inputs</td>
+  </tr>
+  <tr>
+    <td>reset()</td>
+    <td>You can call reset function that resets input value (see bellow)</td>
+  </tr>
+</tbody>
+</table>
+
+#### Events usage:
+
+``` html
+<template>
+    <OneTimePassword
+        @completed="onCompleteHandler"
+        @changed="onChangedHandler"
+        @paste="onPasteHandler"
+        ref="otpComponent"
+    />
+    <button @click="resetOtp">Reset</button>
+</template>
 
 <script setup>
+import {ref} from "vue";
 import {OneTimePassword} from '@altgram/vue3-one-time-password'
 
-// You can utilize styles provided by the package
-// or customize them using styled-components to suit your needs.
-import "@altgram/vue3-one-time-password/style.css"
-
-import {ref} from "vue";
-const isTokenValid = ref(true),
+const otpComponent = ref(null);
 
 const onCompleted = (token) => {
     console.debug("Completed", token);
-    //do some code to handle validity
-    isTokenValid.value = true;
+    // write logic with completed code
 };
 
 const onChanged = (token) => {
     console.debug("Token changed",  token);
-    //do some code to handle validity
-    isTokenValid.value = false;
+    // write logic with changed code
 };
 
 const onPaste = (token) => {
     console.debug("Token pasted", token);
+    // write logic with pasted code
 };
+
+const resetOtp = () => {
+    // reset input value if needed
+    otpComponent.value.reset()
+}
 </script>
 ```
-<br/>
-
-Expected output :
 
 <br/>
 
-<p align="center">
-<img src="https://i.ibb.co/BgR6Yvn/otp-input-error.gif" alt="otp-input-error" border="0">
-</p>
-
-
-
-##  Key Features
-
-- [x] Dynamic display modes - **Group** and **Separate**
-
-- [x] Fully customizable style - **Input** , **wrapper** , **Active Input**, **Errors**
-
-- [x] Direction of inputs - **RTL** / **LTR**
-
-- [x] Dynamic Type - **Number** and **Text**
-
-- [x] Dynamic **Number of inputs**
-
-- [x] Your desired character as input **placeholder**
-
-- [x] Controllable **gap** between inputs
-
-- [x] **Disabled** inputs
-
-- [x] **Error handling** - with customizable text
-
-- [x] **Auto Focus** on inputs
-
-- [x] **Password** input type
-
-- [ ]  **web-otp** - auto fill input from sms  *(Coming soon ... )*
-
-- [ ]  **Vue 3.x** - compatible with vue 3.x *(Coming soon ... )*
-  <br/>
-  <br/>
-
-## Props
+## Main Props
 
 <table>
 <tbody>
@@ -129,289 +145,247 @@ Expected output :
     <td>Name</td>
     <td>Type</td>
     <td>Default</td>
+    <td>Options</td>
     <td>Description</td>
   </tr>
   <tr>
-    <td>id</td>
-    <td>String</td>
-    <td>"otp"</td>
-    <td>Id of opt input when you have multiple otp-inputs in a page.</td>
-  </tr>
-  <tr>
-    <td>digits</td>
+    <td>inputCount</td>
     <td>Number</td>
-    <td>5</td>
+    <td>6</td>
+    <td><b>number</b></td>
     <td>Number of OTP inputs to be rendered.</td>
   </tr>
   <tr>
-    <td>mode</td>
+    <td>otpMode</td>
     <td>String</td>
-    <td>"separate"</td>
-    <td>Way of showing opt input, options: separate , group</td>
+    <td>"divided"</td>
+    <td><b>"divided", "group"</b></td>
+    <td>Change display of input, options: separate , group</td>
   </tr>
   <tr>
-    <td>type</td>
+    <td>inputType</td>
     <td>String</td>
     <td>"number"</td>
-    <td>Type of input data , options : number, text, password</td>
+    <td><b>"number", "text", "password"</b></td>
+    <td>Type of input data</td>
   </tr>
   <tr>
     <td>placeholder</td>
     <td>String</td>
     <td> "-" </td>
+    <td><b>string</b></td>
     <td>Placeholder of inputs where data places</td>
   </tr>
   <tr>
-    <td>radius</td>
-    <td>Number</td>
-    <td>5</td>
+    <td>borderRadius</td>
+    <td>String</td>
+    <td>"5px"</td>
+    <td><b>string</b></td>
     <td>Border radius of inputs (in both modes)</td>
   </tr>
   <tr>
-    <td>gap</td>
-    <td>Number</td>
-    <td>10</td>
+    <td>inputsGapWidth</td>
+    <td>String</td>
+    <td>"10px"</td>
+    <td><b>string</b></td>
     <td>Gap between inputs (in both modes)</td>
   </tr>
   <tr>
     <td>isDisabled</td>
     <td>Boolean</td>
     <td>false</td>
+    <td><b>true, false</b></td>
     <td> Whether the input are Disabled or not</td>
   </tr>
   <tr>
     <td>isValid</td>
     <td>Boolean</td>
     <td>true</td>
-     <td>Whether the entered value is valid or not</td></tr>
+    <td><b>true, false</b></td>
+    <td>Whether the entered value is valid or not</td></tr>
   <tr>
-    <td>rtl</td>
+    <td>reverseDirection</td>
     <td>Boolean</td>
     <td>false</td>
+    <td><b>true,false</b></td>
     <td>Whether the input is RTL or not</td>
   </tr>
   <tr>
-    <td>autoFocus</td>
-    <td>Boolean</td>
+    <td>isAutoFocus</td>
+    <td>Bool</td>
     <td>true</td>
+    <td><b>true, false</b></td>
     <td>The input should be focused-on when page rendered or not</td>
   </tr>
   <tr>
-    <td>separateInputClass</td>
-    <td>String</td>
-    <td>-</td>
-    <td>Single input class in separate mode</td>
-  </tr>
-  <tr>
-    <td>separateWrapperClass</td>
-    <td>String</td>
-    <td>-</td>
-    <td>Inputs wrapper class in separate mode</td>
-  </tr>
-  <tr>
-    <td>groupInputClass</td>
-    <td>String</td>
-    <td>-</td>
-    <td>Single input class in  group mode</td>
-  </tr>
-  <tr>
-    <td>groupWrapperClass</td>
-    <td>String</td>
-    <td>-</td>
-    <td>Inputs wrapper class in group mode</td>
-  </tr>
-  <tr>
-    <td>activeInputClass</td>
-    <td>String</td>
-    <td>-</td>
-    <td>Style of single input when its focused</td>
-  </tr>
-  <tr>
-    <td>activeWrapperClass</td>
-    <td>String</td>
-    <td>-</td>
-    <td>Style of inputs wrapper when its focused on one input</td>
+    <td>hideCursor</td>
+    <td>Bool</td>
+    <td>false</td>
+    <td><b>true, false</b></td>
+    <td>The input cursor should be hidden on focus</td>
   </tr>
 </tbody>
 </table>
-<br/>
-
->  **Note**
-> Don't Panic! 😁 There is a guide to how use class props and style inputs as you wish, [see this guide](#styling).
-
-<br/>
-
-## Events
-
-
-<table>
-<tbody>
-  <tr>
-    <td>Name</td>
-    <td>Description</td>
-  </tr>
-  <tr>
-    <td>on-complete</td>
-    <td>Return OTP value typed in inputs when all digits are completed </td>
-  </tr>
-  <tr>
-    <td>on-changed</td>
-    <td>Return Last single OTP value in inputs after typing</td>
-  </tr>
-  <tr>
-    <td>on-paste</td>
-    <td>its triggered when paste value in inputs</td>
-  </tr>
-</tbody>
-</table>
-
 <br/>
 
 ## Styling
-To customize the appearance of the inputs, we can pass our classes to the component as props:
 
-First we should know how to pass class to otp component and use it . there is several approach, we focus on **scoped CSS** with *deep selector* (you can do yours😉) :
+You can use predefined styling (import bellow) or write custom css.
+Additionally, you can insert your own classes into component as props.
+#### Styling props:
+<table>
+    <tbody>
+     <tr>
+        <td>Name</td>
+        <td>Type</td>
+        <td>Default</td>
+        <td>Options</td>
+        <td>Description</td>
+      </tr>
+        <tr>
+            <td>customWrapperClass</td>
+            <td>String</td>
+            <td>" "</td>
+            <td><b>string</b></td>
+            <td>Wrapper class</td>
+        </tr>
+        <tr>
+            <td>customInputClass</td>
+            <td>String</td>
+            <td>" "</td>
+            <td><b>string</b></td>
+            <td>Input class</td>
+        </tr>
+        <tr>
+            <td>customWrapperValidClass</td>
+            <td>String</td>
+            <td>"otp-wrapper-active"</td>
+            <td><b>string</b></td>
+            <td>Wrapper valid class</td>
+        </tr>
+        <tr>
+            <td>customWrapperErrorClass</td>
+            <td>String</td>
+            <td>"otp-wrapper-error"</td>
+            <td><b>string</b></td>
+            <td>Wrapper error class</td>
+        </tr>
+        <tr>
+            <td>customActiveInputClass</td>
+            <td>String</td>
+            <td>"otp-input-active"</td>
+            <td><b>string</b></td>
+            <td>Active input class (focused)</td>
+        </tr>
+    </tbody>
+</table>
 
-<h4>Separate Mode :</h4>
+``` html
+<script setup>
+    import "@altgram/vue3-one-time-password/style.css"
+</script>
+```
 
-template :
+#### Example styling of component
+
 ``` html
 <template>
- <otp-input
-	separateWrapperClass="separate-wrapper-class"
-	separateInputClass="separate-input-class"
- />
+    <OneTimePassword
+	    customWrapperClass="class-styling-wrapper"
+	    customInputClass="class-styling-inputs"
+	    customWrapperValidClass="class-styling-wrapper-valid"
+	    customWrapperErrorClass="class-styling-wrapper-error"
+	    customActiveInputClass="class-styling-inputs-active"
+    />
 </template>
-```
-css :
-``` CSS
-<style scoped>
- .vue-otp-input  >>>  .separate-input-class {
-	text-align: center;
-	font-weight: bold;
-	font-size: 20px;
-	background-color: aquamarine;
-	color: blue;
-	border: solid  2px  red;
-	width: 48px;
-	height: 48px;
+<style>
+.otp-app .class-styling-wrapper {
+    ...
  }
-
-.vue-otp-input  >>>  .separate-wrapper-class {
-	border: solid  3px  green;
+.otp-app .class-styling-inputs {
+    ...
+}
+.otp-app .class-styling-wrapper-valid {
+    ...
+}
+.otp-app .class-styling-wrapper-error {
+    ...
+}
+.otp-app .class-styling-inputs-active {
+    ...
 }
 </style>
 ```
-output:
-
-<img src="https://i.ibb.co/wYpSff2/Screenshot-2022-08-12-181410.jpg" alt="Screenshot-2022-08-12-181410" border="0">
-
-<h4>Group Mode :</h4>
-<br/>
-
-template :
+## Examples
+#### Group Mode:
 
 ``` html
 <template>
- <otp-input
-	mode="group"
-	groupWrapperClass="group-wrapper-class"
-	groupInputClass="group-input-class"
-/>
+    <OneTimePassword otpMode="group"/>
 </template>
 ```
-
-css :
-
-``` CSS
-<style scoped>
-.vue-otp-input  >>>  .group-wrapper-class {
-	border: solid  3px  green;
-	background-color: blue;
-}
-
-.vue-otp-input  >>>  .group-input-class {
-	background-color: blue;
-	border: none;
-	text-align: center;
-	font-weight: bold;
-	font-size: 20px;
-	color: #fff;
-	width: 48px;
-	height: 48px;
-}
-</style>
-```
-
-output :
-
-<img src="https://i.ibb.co/vqpdcrR/Screenshot-2022-08-12-182437.jpg" alt="Screenshot-2022-08-12-182437" border="0">
+Result:
+<br/>
+<img src="./assets/otp-group.png" alt="Example Image" width="400"/>
 
 ---
-<h4>Error Message  :</h4>
 
-template :
+#### Error Message:
+
 ``` html
 <template>
-	 <otp-input
-	 :isValid="false"  errorClass="error-class">
-	 <template #errorMessage> There is an error </template>
-	</otp-input>
+    <OneTimePassword :isValid="false"  customWrapperErrorClass="wrapper-error-class">
+        <p>Error message<p>
+    </OneTimePassword>
 </template>
 
-```
-
-css :
-``` CSS
-<style scoped>
-
-.vue-otp-input  >>>  .error-class {
-	color: #66ff00;
-	line-height: 1.5em;
-	font-weight: bold;
+<style>
+.otp-app .wrapper-error-class {
+    color: red;
+    line-height: 1rem;
+    font-size: 12px;
+    text-align: left;
 }
 </style>
 ```
-output :
 
-<img src="https://i.ibb.co/DG94KdD/Screenshot-2022-08-12-205308.jpg" alt="Screenshot-2022-08-12-205308" border="0">
-
+Result:
 <br/>
+<img src="./assets/otp-error.png" alt="Example Image" width="400"/>
 
-<h4>Active input  (focus)   :</h4>
+---
+<h4>Divided password input, four digits, without placeholder</h4>
+``` html
+<template>
+	 <OneTimePassword otpMode="divided" inputType="password" placeholder="" :inputCount="4" />
+</template>
+```
+
+Result:
 <br/>
-template :
+<img src="./assets/otp-four-digits-password.png" alt="Example Image" width="400"/>
+---
+
+<h4>Focused (active) input:</h4>
 
 ``` html
 <template>
-	 <otp-input
-		 activeInputClass="active-input-class">
-	</otp-input>
+	 <OneTimePassword customActiveInputClass="custom-input-active" />
 </template>
-```
-css :
-``` CSS
-<style scoped>
-
-.vue-otp-input  >>>  .active-input-class {
+<style>
+.otp-app .custom-input-active {
 	text-align: center;
-	border-color: red  !important;
-	transform: scale(1.2);
+	border: 1px solid green;
 }
 </style>
 ```
 
-output :
-
-<img src="https://i.ibb.co/d0pYb2m/Screenshot-2022-08-12-215955.jpg" alt="Screenshot-2022-08-12-215955" border="0">
-
-or in group mode with `activeWrapperClass` prop :
-
-
-<img src="https://i.ibb.co/7VhVkzR/Screenshot-2022-08-12-220828.jpg" alt="Screenshot-2022-08-12-220828" border="0">
-
+Result :
 <br/>
+<img src="./assets/otp-input-valid.png" alt="Example Image" width="400"/>
+
 <br/>
 
 ## License
+
 MIT
