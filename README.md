@@ -5,6 +5,7 @@
        <h1>One Time Password Component</h1>
     <br>
 </div>
+
 <div align="center">
     <h4>
         Customizable OTP (One Time Password) component for web apps,
@@ -29,15 +30,18 @@ and insert your own error messages.</p>
     <a  href="#examples">Examples</a> •
     <a  href="#license">License</a>
 </div>
+
 <br/>
 
 <div align="center">
-<img src="./assets/otp-preview.gif" alt="Example Image" width="500"/>
+    <img src="./assets/otp-preview.gif" alt="Example Image" width="500"/>
 </div>
 
 <br/>
 
 ## Installation
+
+<br/>
 
 ```sh
 npm i @altgram/vue3-one-time-password
@@ -50,6 +54,8 @@ yarn add @altgram/vue3-one-time-password
 ```
 
 ## Usage
+
+<br/>
 
 1. Import component into your app
 
@@ -73,6 +79,8 @@ yarn add @altgram/vue3-one-time-password
 ```
 
 ## Events
+
+<br/>
 
 <table>
 <tbody>
@@ -100,6 +108,8 @@ yarn add @altgram/vue3-one-time-password
 </table>
 
 #### Events usage:
+
+<br/>
 
 ``` html
 <template>
@@ -143,6 +153,8 @@ const resetOtp = () => {
 <br/>
 
 ## Props
+
+<br/>
 
 <table>
 <tbody>
@@ -235,9 +247,13 @@ const resetOtp = () => {
 
 ## Styling
 
+<br/>
+
 You can use predefined styling (import bellow) or write custom css.
 Additionally, you can insert your own classes into component as props.
+
 #### Styling props:
+
 <table>
     <tbody>
      <tr>
@@ -321,7 +337,11 @@ Additionally, you can insert your own classes into component as props.
 }
 </style>
 ```
+
 ## Examples
+
+<br/>
+
 #### Group Mode:
 
 ``` html
@@ -329,8 +349,11 @@ Additionally, you can insert your own classes into component as props.
     <OneTimePassword otpMode="group"/>
 </template>
 ```
+
 Result:
+
 <br/>
+
 <img src="./assets/otp-group.png" alt="Example Image" width="400"/>
 
 ---
@@ -355,11 +378,14 @@ Result:
 ```
 
 Result:
+
 <br/>
+
 <img src="./assets/otp-error.png" alt="Example Image" width="400"/>
 
 ---
 <h4>Divided password input, four digits, without placeholder</h4>
+
 ``` html
 <template>
 	 <OneTimePassword otpMode="divided" inputType="password" placeholder="" :inputCount="4" />
@@ -367,8 +393,11 @@ Result:
 ```
 
 Result:
+
 <br/>
+
 <img src="./assets/otp-four-digits-password.png" alt="Example Image" width="400"/>
+
 ---
 
 <h4>Focused (active) input:</h4>
@@ -386,7 +415,9 @@ Result:
 ```
 
 Result :
+
 <br/>
+
 <img src="./assets/otp-input-valid.png" alt="Example Image" width="400"/>
 
 <br/>
