@@ -1,7 +1,7 @@
 {
   "name": "@altgr4m/vue3-one-time-password",
   "description": "Customizable OTP (One Time Password) component for web apps, compatible with Vue 3",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": false,
   "author": {
     "name": "Daniel Gramblička",
