@@ -111,7 +111,7 @@ yarn add @altg4m/vue3-one-time-password
 ``` html
 <template>
     <OneTimePassword
-        @completed="onCompleteHandler"
+        @completed="onCompletedHandler"
         @changed="onChangedHandler"
         @paste="onPasteHandler"
         ref="otpComponent"
@@ -125,17 +125,17 @@ import {OneTimePassword} from '@altgr4m/vue3-one-time-password'
 
 const otpComponent = ref(null);
 
-const onCompleted = (token) => {
+const onCompletedHandler = (token) => {
     console.debug("Completed", token);
     // write logic with completed code
 };
 
-const onChanged = (token) => {
+const onChangedHandler = (token) => {
     console.debug("Token changed",  token);
     // write logic with changed code
 };
 
-const onPaste = (token) => {
+const onPasteHandler = (token) => {
     console.debug("Token pasted", token);
     // write logic with pasted code
 };
