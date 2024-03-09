@@ -19,7 +19,7 @@ Additionally, you can choose of three types of inputs (number, text, password)
 and insert your own error messages.</p>
 <br/>
 
-<p  align="center">
+<div align="center">
     <a  href="#installation">Installation</a> •
     <a  href="#usage">Usage</a> •
     <a  href="#events">Events</a> •
@@ -28,7 +28,7 @@ and insert your own error messages.</p>
     <a  href="#stylingProps">Styling-Props</a> •
     <a  href="#examples">Examples</a> •
     <a  href="#license">License</a>
-</p>
+</div>
 <br/>
 
 ![Example Image](./assets/otp-preview.gif)
