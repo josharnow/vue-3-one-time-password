@@ -429,7 +429,7 @@ Result :
 ## Demo
 
 <br/>
-https://gitlab.com/altgr4m/demo-vue3-one-time-password
+https://gitlab.com/altgram/demo-vue3-one-time-password
 
 ## License
 
