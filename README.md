@@ -27,6 +27,7 @@ and insert your own error messages.</p>
     <a  href="#props">Props</a> •
     <a  href="#styling">Styling</a> •
     <a  href="#examples">Examples</a> •
+    <a  href="#demo">Demo</a>
     <a  href="#license">License</a>
 </div>
 
@@ -420,6 +421,11 @@ Result :
 <img src="./assets/otp-input-valid.png" alt="Example Image" width="400"/>
 
 <br/>
+
+## Demo
+
+<br/>
+https://gitlab.com/altgram/demo-vue3-one-time-password
 
 ## License
 
