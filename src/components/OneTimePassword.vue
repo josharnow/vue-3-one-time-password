@@ -148,7 +148,7 @@ const classInput = otpMode === GROUP_MODE ? 'otp-input-group' : 'otp-element-inp
 const otpWrapperValidClass = isValid ? customWrapperValidClass : customWrapperErrorClass;
 const otpWrapperActive = otpMode === GROUP_MODE ? otpWrapperValidClass : '';
 const dividedModeValid = isValid ? 'otp-wrapper-divided-valid' : 'otp-wrapper-divided-err';
-const inputElementClass = otpMode === DIVIDED_MODE ? dividedModeValid : 'otp-input-group'
+const inputElementClass = otpMode === DIVIDED_MODE ? dividedModeValid : 'otp-input-group-valid'
 const activeInputClass = otpMode === DIVIDED_MODE ? customActiveInputClass : '';
 
 
@@ -361,7 +361,7 @@ onMounted(() => {
   border: solid 1px #dedede;
 }
 
-.otp-app .otp-input-group {
+.otp-app .otp-input-group-valid {
   background-color: transparent;
   font-weight: 300;
   border: none;
