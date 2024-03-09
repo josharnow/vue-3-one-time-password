@@ -1,14 +1,14 @@
-<h1  style="text-align: center;">
+<div align="center">
     <br>
         <img width="100px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1024px-Vue.js_Logo_2.svg.png" alt="vue-logo">
     <br>
-        One Time Password Component
-    <br>
-</h1>
-<h4  align="center">
-Customizable OTP (One Time Password) component for web apps, compatible with Vue 3.
-Autofill one time code from email / sms.
+       <h1>One Time Password Component</h1>
+</div>
+<h4 align="center">
+Customizable OTP (One Time Password) component for web apps,
+compatible with Vue (Vue 3) and Autofill one time code from email / sms.
 </h4>
+
 <p>The OTP component allows you to utilize two display modes (divided and group)
 with an adjustable number of inputs. You can either write your own styling or
 utilize predefined styles for all tags, including active/error classes.
