@@ -54,11 +54,12 @@ yarn add @altg4m/vue3-one-time-password
 
 <br/>
 
-1. Import component into your app
+1. Register (import) component into your app
+##### a) Register locally
 
 ``` html
 <script setup>
-    import {OneTimePassword} from '@altgr4m/vue3-one-time-password'
+    import OneTimePassword from '@altgr4m/vue3-one-time-password'
 
     // You can utilize styles provided by the package
     // or customize them using own styling to suit your needs.
@@ -67,7 +68,21 @@ yarn add @altg4m/vue3-one-time-password
 </script>
 ```
 
-2. Insert otp component into your template
+or
+
+##### b) Register globally
+```js
+//  main.js or main.ts
+
+import OneTimePassword from "@altgr4m/vue3-one-time-password";
+import "@altgr4m/vue3-one-time-password/style.css"
+
+const app = createApp(App);
+app.component('OneTimePassword', OneTimePassword)
+app.mount('#app')
+```
+
+2. Basic usage
 
 ``` html
 <template>
