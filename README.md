@@ -34,7 +34,7 @@ and insert your own error messages.</p>
 <br/>
 
 <div align="center">
-    <img src="./assets/otp-preview.gif" alt="Example Image" width="500"/>
+    <img src="https://gitlab.com/altgram/demo-vue3-one-time-password/-/raw/main/assets/otp-preview.gif" alt="Example Image" width="500"/>
 </div>
 
 <br/>
@@ -354,7 +354,7 @@ Result:
 
 <br/>
 
-<img src="./assets/otp-group.png" alt="Example Image" width="400"/>
+<img src="https://gitlab.com/altgram/demo-vue3-one-time-password/-/raw/main/assets/otp-group.png" alt="Example Image" width="400"/>
 
 ---
 
@@ -381,7 +381,7 @@ Result:
 
 <br/>
 
-<img src="./assets/otp-error.png" alt="Example Image" width="400"/>
+<img src="https://gitlab.com/altgram/demo-vue3-one-time-password/-/raw/main/assets/otp-error.png" alt="Example Image" width="400"/>
 
 ---
 <h4>Divided password input, four digits, without placeholder</h4>
@@ -396,7 +396,7 @@ Result:
 
 <br/>
 
-<img src="./assets/otp-four-digits-password.png" alt="Example Image" width="400"/>
+<img src="https://gitlab.com/altgram/demo-vue3-one-time-password/-/raw/main/assets/otp-four-digits-password.png" alt="Example Image" width="400"/>
 
 ---
 
@@ -418,7 +418,7 @@ Result :
 
 <br/>
 
-<img src="./assets/otp-input-valid.png" alt="Example Image" width="400"/>
+<img src="https://gitlab.com/altgram/demo-vue3-one-time-password/-/raw/main/assets/otp-input-valid.png" alt="Example Image" width="400"/>
 
 <br/>
 
