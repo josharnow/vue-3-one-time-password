@@ -31,7 +31,9 @@ and insert your own error messages.</p>
 </div>
 <br/>
 
-![Example Image](./assets/otp-preview.gif)
+<div align="center">
+<img src="./assets/otp-preview.gif" alt="Example Image" width="500"/>
+</div>
 
 <br/>
 
