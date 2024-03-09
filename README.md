@@ -6,12 +6,9 @@
     <br>
 </div>
 
-<div align="center">
-    <h4>
-        Customizable OTP (One Time Password) component for web apps,
-        compatible with Vue (Vue 3) and Autofill one time code from email / sms.
-    </h4>
-</div>
+> Vue 3 OTP is a 23kB lightweight fully customizable OTP (One Time Password) component for web apps,
+compatible with Vue (Vue 3) and Autofill one time code from email / sms.
+
 
 <p>The OTP component allows you to utilize two display modes (divided and group)
 with an adjustable number of inputs. You can either write your own styling or
