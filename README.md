@@ -428,8 +428,9 @@ Result :
 
 ## Demo
 
-<br/>
 https://gitlab.com/altgram/demo-vue3-one-time-password
+
+<br/>
 
 ## License
 
