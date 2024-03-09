@@ -252,6 +252,16 @@ const resetOtp = () => {
 You can use predefined styling (import bellow) or write custom css.
 Additionally, you can insert your own classes into component as props.
 
+<br/>
+
+``` html
+<script setup>
+    import "@altgr4m/vue3-one-time-password/style.css"
+</script>
+```
+
+<br/>
+
 #### Styling props:
 
 <table>
@@ -300,12 +310,6 @@ Additionally, you can insert your own classes into component as props.
         </tr>
     </tbody>
 </table>
-
-``` html
-<script setup>
-    import "@altgr4m/vue3-one-time-password/style.css"
-</script>
-```
 
 #### Example styling of component
 
