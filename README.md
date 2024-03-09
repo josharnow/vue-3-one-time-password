@@ -1,9 +1,9 @@
-<h1  align="center">
-<br>
-<img width="100px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1024px-Vue.js_Logo_2.svg.png" alt="vue-logo">
-<br>
-One Time Password Component
-<br>
+<h1  style="text-align: center;">
+    <br>
+        <img width="100px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1024px-Vue.js_Logo_2.svg.png" alt="vue-logo">
+    <br>
+        One Time Password Component
+    <br>
 </h1>
 <h4  align="center">
 Customizable OTP (One Time Password) component for web apps, compatible with Vue 3.
