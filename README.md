@@ -44,13 +44,13 @@ and insert your own error messages.</p>
 <br/>
 
 ```sh
-npm i @altgram/vue3-one-time-password
+npm i @altgr4m/vue3-one-time-password
 ```
 
 or
 
 ```sh
-yarn add @altgram/vue3-one-time-password
+yarn add @altg4m/vue3-one-time-password
 ```
 
 ## Usage
@@ -61,12 +61,12 @@ yarn add @altgram/vue3-one-time-password
 
 ``` html
 <script setup>
-    import {OneTimePassword} from '@altgram/vue3-one-time-password'
+    import {OneTimePassword} from '@altgr4m/vue3-one-time-password'
 
     // You can utilize styles provided by the package
     // or customize them using own styling to suit your needs.
     // - Look at the "Styling" section bellow
-    import "@altgram/vue3-one-time-password/style.css"
+    import "@altgr4m/vue3-one-time-password/style.css"
 </script>
 ```
 
@@ -124,7 +124,7 @@ yarn add @altgram/vue3-one-time-password
 
 <script setup>
 import {ref} from "vue";
-import {OneTimePassword} from '@altgram/vue3-one-time-password'
+import {OneTimePassword} from '@altgr4m/vue3-one-time-password'
 
 const otpComponent = ref(null);
 
@@ -303,7 +303,7 @@ Additionally, you can insert your own classes into component as props.
 
 ``` html
 <script setup>
-    import "@altgram/vue3-one-time-password/style.css"
+    import "@altgr4m/vue3-one-time-password/style.css"
 </script>
 ```
 
@@ -425,7 +425,7 @@ Result :
 ## Demo
 
 <br/>
-https://gitlab.com/altgram/demo-vue3-one-time-password
+https://gitlab.com/altgr4m/demo-vue3-one-time-password
 
 ## License
 
