@@ -24,7 +24,7 @@ and insert your own error messages.</p>
     <a  href="#props">Props</a> •
     <a  href="#styling">Styling</a> •
     <a  href="#examples">Examples</a> •
-    <a  href="#demo">Demo</a>
+    <a  href="#demo">Demo</a> •
     <a  href="#license">License</a>
 </div>
 
