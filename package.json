@@ -1,7 +1,7 @@
 {
   "name": "@altgr4m/vue3-one-time-password",
   "description": "Customizable OTP (One Time Password) is a 23kB lightweight component for web apps, compatible with Vue 3 and composition api",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "private": false,
   "author": {
     "name": "Daniel Gramblička",
@@ -20,7 +20,8 @@
     "one time password Component",
     "otp divided/group mode",
     "transaction pin",
-    "otp composition vue"
+    "otp composition vue",
+    "nuxt"
   ],
   "type": "module",
   "main": "./dist/one-time-password.umd.js",
