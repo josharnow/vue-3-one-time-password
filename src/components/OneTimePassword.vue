@@ -2,7 +2,7 @@
   <div class="otp-app">
     <div
         class="otp-wrapper"
-        :class="[isInputFocused ? otpWrapperActive : classInput, customWrapperClass]"
+        :class="[isInputFocused ? otpWrapperActive : '', classInput, customWrapperClass]"
         :style="{direction: inputDirection, gap: inputsGapWidth, borderRadius}"
     >
       <input
@@ -174,7 +174,7 @@ const init = (): void => {
       });
     }
   } else {
-    console.warn('ref digit input is empty')
+    console.warn('ref "digitInputCollection" is empty')
   }
 }
 
@@ -309,9 +309,9 @@ onMounted(() => {
 
 <style>
 .otp-app {
-  width: 100%;
+  width: max-content;
+  max-width: 100%;
 }
-
 .otp-app .otp-wrapper {
   direction: ltr;
   text-align: center;
@@ -357,6 +357,13 @@ onMounted(() => {
   height: 40px;
 }
 
+@media only screen and (max-width: 600px) {
+  .otp-app .otp-input-group {
+    height: 40px;
+    width: 100%;
+  }
+}
+
 .otp-app .otp-input-group {
   border: solid 1px #dedede;
 }
@@ -368,14 +375,6 @@ onMounted(() => {
   width: 3rem;
   height: 40px;
   text-align: center;
-}
-
-
-@media only screen and (max-width: 600px) {
-  .otp-app .otp-input-group {
-    width: 2.5rem;
-    height: 40px;
-  }
 }
 
 .otp-app .otp-input-active {
