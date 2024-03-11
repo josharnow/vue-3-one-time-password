@@ -440,7 +440,7 @@ Result :
 
 ## Demo
 
-https://gitlab.com/altgram/demo-vue3-one-time-password
+https://github.com/gramblicka/demo-vue3-one-time-password
 
 <br/>
 
