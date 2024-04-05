@@ -151,6 +151,7 @@ const dividedModeValid = isValid ? 'otp-wrapper-divided-valid' : 'otp-wrapper-di
 const inputElementClass = otpMode === DIVIDED_MODE ? dividedModeValid : 'otp-input-group-valid'
 const activeInputClass = otpMode === DIVIDED_MODE ? customActiveInputClass : '';
 
+const parentModel = defineModel();
 
 /**
  * Handle initialization, set focus on first input, set input types and handle whitelisted characters on user input
@@ -238,6 +239,8 @@ const onInputTrigger = (index: number): void => {
   }
   joinedValue.value = inputModel.value.map((value) => value).join('');
 
+  parentModel.value = joinedValue.value;
+  
   if (joinedValue.value.length === inputCount) {
     onComplete(joinedValue.value);
   }
